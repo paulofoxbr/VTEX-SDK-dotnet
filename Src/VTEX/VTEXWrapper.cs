@@ -141,12 +141,18 @@
                 {
                     cookieContainer.Add(uriBuilder.Uri, cookie);
                 }
-
+                // Pegar o retorno para o devido tratamento.
                 response = await RequestInternalAsync(method, token, data, client, uriBuilder)
                     .ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
                 result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    LogConsumer.Error("API retornou erro");
+
+                }
+
+               // response.EnsureSuccessStatusCode(); //Throws an exception if the IsSuccessStatusCode property for the HTTP response is false.
                 return result;
             }
             catch (AggregateException e)

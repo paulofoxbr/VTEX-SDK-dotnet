@@ -542,6 +542,7 @@ namespace VTEX
                 var source = new CancellationTokenSource(new TimeSpan(0, 5, 0));
                 var json = await _wrapper.ServiceInvokerAsync(HttpRequestMethod.POST, $"{PlatformConstants.OmsOrders}/{orderId}/changestate/{newStatus.GetInternalValue()}", source.Token).ConfigureAwait(false);
                 LogConsumer.Info(json);
+                
             }
             catch (AggregateException e)
             {

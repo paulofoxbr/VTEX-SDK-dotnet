@@ -464,6 +464,8 @@
         /// </value>
         [JsonProperty("authorizedDate")]
         public DateTime AuthorizedDate { get; set; }
-
+       
+        [JsonProperty("error")]
+        public Error Error { get; set; }
     }
 }
