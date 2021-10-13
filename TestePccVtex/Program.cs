@@ -14,7 +14,8 @@ namespace TestePccVtex
     {
         static void Main(string[] args)
         {
-            // eCommerceContext();
+            
+            eCommerceContext();
             //TestaLogger();
 
 
@@ -59,7 +60,7 @@ namespace TestePccVtex
 
                 var orders = vtex.GetOrdersList(VTEX.Enums.OrderStatus.READY_FOR_HANDLING);
 
-                var ret = putOrdersOnQueue(orders);
+                //var ret = putOrdersOnQueue(orders);
 
 
 
