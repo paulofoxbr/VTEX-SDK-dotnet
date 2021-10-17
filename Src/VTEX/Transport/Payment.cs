@@ -1,6 +1,6 @@
 ﻿namespace VTEX.Transport
 {
-    using CrispyWaffle.Serialization;
+   // using CrispyWaffle.Serialization;
     using Newtonsoft.Json;
     using System;
     using System.ComponentModel;
@@ -151,7 +151,7 @@
         /// <value>The redemption code.</value>
 
         [JsonProperty("redemptionCode")]
-        public NotNullObserver RedemptionCode { get; set; }
+        public string RedemptionCode { get; set; }
 
         /// <summary>
         /// Gets or sets the group.

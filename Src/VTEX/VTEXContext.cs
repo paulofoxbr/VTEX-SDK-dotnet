@@ -192,6 +192,12 @@ namespace VTEX
 
         }
 
+        private string GetOrderInternalJson(string orderId)
+        {
+            string JsonOrder = _wrapper.ServiceInvokerAsync(HttpRequestMethod.GET, $"{PlatformConstants.OmsOrders}/{orderId}", CancellationToken.None).Result;
+
+            return JsonOrder;
+        }
         /// <summary>
         /// Get a order by order id
         /// </summary>
@@ -315,6 +321,11 @@ namespace VTEX
                 $"{PlatformConstants.OmsFeed}confirm",
                 CancellationToken.None,
                 data: data).Wait();
+        }
+
+        public string GetOrderJson(string orderId)
+        {
+            return GetOrderInternalJson(orderId);
         }
 
         /// <summary>

@@ -35,10 +35,15 @@ namespace EcommerceIntegration
             return ListaDePedidos.ListaDePedidos;
         }
 
-        public object GetOrderDetail(string pedido)
+        public string GetOrderDetailJson(string pedido)
+        {
+            return VTEXContext.GetOrderJson(pedido);
+        }
+
+        public Order GetOrderDetail(string pedido)
         {
 
-            var orderDetail = VTEXContext.GetOrder(pedido);
+            Order orderDetail = VTEXContext.GetOrder(pedido);
 
             return orderDetail;
             // throw new NotImplementedException();

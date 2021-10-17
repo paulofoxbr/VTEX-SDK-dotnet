@@ -31,7 +31,7 @@
         /// </summary>
         /// <value>The product identifier.</value>
         [JsonProperty("productId")]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets the ean.

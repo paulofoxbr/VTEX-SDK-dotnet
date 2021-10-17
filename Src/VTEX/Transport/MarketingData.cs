@@ -1,7 +1,9 @@
 ﻿namespace VTEX.Transport
 {
-    using CrispyWaffle.Serialization;
+    //using CrispyWaffle.Serialization;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
+    
 
     /// <summary>
     /// Class MarketingData. This class cannot be inherited.
@@ -77,7 +79,7 @@
         /// <value>
         /// The marketing tags.
         /// </value>
-        [JsonProperty("marketingTags")]
-        public NotNullObserver[] MarketingTags { get; set; }
+        [JsonProperty("marketingTags",NullValueHandling=NullValueHandling.Ignore)]
+        public List<string> MarketingTags { get; set; }
     }
 }

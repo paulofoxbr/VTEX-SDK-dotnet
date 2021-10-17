@@ -51,7 +51,7 @@ namespace TestePccVtex
             const string AppKey = "vtexappkey-epocacosmeticos-SCKHKR";
             const string AppToken = "YNYGHPDSGGBQOHVMSEFWXUSTAITVOZMXVQILNFESMAASWZRVKXSLHTVDVFGYWIDHUEUYYJYMAMKWTZWBRYKRHAPCUEQIZFWEXTYRETWAYFLUJYJVIFHYXLATOSDTTQNV";
             //var codigoPedidoVtex = "v40379447epcc-001";  // Pedido não existente.
-            var codigoPedidoVtex = "v40379447epcc-01"; // Pedido Existente
+            //var codigoPedidoVtex = "v40379447epcc-01"; // Pedido Existente
             // var codigoPedidoVtex = "BWW-Lojas_Americanas-285264647201";
             try
             {

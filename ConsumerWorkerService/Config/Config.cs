@@ -15,8 +15,9 @@ namespace ConsumerWorkerService.Config
         public Configurations()
         {
             ServerRabbitMQurl = "localhost";
-            ExchangeName = "Vtex";
-            QueueName = "Pedidos";
+            ExchangeName = "Vtex-pcc";
+            QueueName = "Pedidos-pcc";
+           
         }
 
     }

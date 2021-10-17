@@ -2,7 +2,7 @@
 {
     using CrispyWaffle.Serialization;
     using Newtonsoft.Json;
-
+    
     /// <summary>
     /// The marketplace class.
     /// This class cannot be inherited.
