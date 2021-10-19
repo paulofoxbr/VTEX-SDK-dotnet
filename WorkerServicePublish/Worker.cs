@@ -54,8 +54,9 @@ namespace WorkerServicePublish
                 foreach (var item in ListaDePedidos)
                 {
                     //var ecommerOrderDetail = ecommerceOrders.GetOrderDetail(item.Pedido);
-
+                    var dt1 = DateTime.Now; 
                     var ecommerceOrderDetail = ecommerceOrders.GetOrderDetailJson(item.Pedido);
+                    var d2 = DateTime.Now;
                     if (ecommerceOrderDetail != null)
                     {
                         PublishMQ(ecommerceOrderDetail);
@@ -161,7 +162,7 @@ namespace WorkerServicePublish
                             Console.WriteLine($"Pedido:{order.OrderId} | {order.ClientProfileData.FirstName} | {order.ClientProfileData.LastName}");
                             channel.BasicAck(ea.DeliveryTag, false);
                         }
-                        catch (Exception ex)
+                        catch (Exception )
                         {
                             channel.BasicNack(ea.DeliveryTag, false, true);
                             throw;

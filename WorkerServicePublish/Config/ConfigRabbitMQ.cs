@@ -18,7 +18,7 @@ namespace WorkerServicePublish.Config
 
         public ConfigRabbitMQ()
         {
-            ServerRabbitMQurl = "172.17.0.6";
+            ServerRabbitMQurl = "rabbitserver";
             ExchangeName = "Vtex";
             QueueName = "Pedidos";
             UserMQ = "guest";

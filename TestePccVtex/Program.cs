@@ -52,13 +52,22 @@ namespace TestePccVtex
             const string AppToken = "YNYGHPDSGGBQOHVMSEFWXUSTAITVOZMXVQILNFESMAASWZRVKXSLHTVDVFGYWIDHUEUYYJYMAMKWTZWBRYKRHAPCUEQIZFWEXTYRETWAYFLUJYJVIFHYXLATOSDTTQNV";
             //var codigoPedidoVtex = "v40379447epcc-001";  // Pedido não existente.
             //var codigoPedidoVtex = "v40379447epcc-01"; // Pedido Existente
-            // var codigoPedidoVtex = "BWW-Lojas_Americanas-285264647201";
+
+            var codigoPedidoVtex = "v42773519epcc-01";
+            
+            /*var codigoPedidoVtex = v42771956epcc - 01
+            var codigoPedidoVtex = v42771924epcc - 01
+            var codigoPedidoVtex = v42768849epcc - 01
+            var codigoPedidoVtex = v42768778epcc - 01
+            var codigoPedidoVtex = v42767958epcc - 01
+            */
+           // var codigoPedidoVtex = "BWW-Lojas_Americanas-285264647201";
             try
             {
                 var vtex = new VTEXContext(lojaEcommerce, AppKey, AppToken);
-                //var order = vtex.GetOrder(codigoPedidoVtex);
+                var order = vtex.GetOrder(codigoPedidoVtex);
 
-                var orders = vtex.GetOrdersList(VTEX.Enums.OrderStatus.READY_FOR_HANDLING);
+                //var orders = vtex.GetOrdersList(VTEX.Enums.OrderStatus.READY_FOR_HANDLING);
 
                 //var ret = putOrdersOnQueue(orders);
 
