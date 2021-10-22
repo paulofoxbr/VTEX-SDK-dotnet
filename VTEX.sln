@@ -38,7 +38,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceIntegration", "Eco
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServicePublishMQ", "WorkerServicePublishMQ\WorkerServicePublishMQ\WorkerServicePublishMQ.csproj", "{8D675D0B-2AEA-4CE1-B280-FD1F8520D8D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceConsumerMQ", "WorkerServiceConsumer\WorkerServiceConsumerMQ.csproj", "{B0293D31-901C-433F-ADEB-4C7F47EB2711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServiceConsumerMQ", "WorkerServiceConsumer\WorkerServiceConsumerMQ.csproj", "{B0293D31-901C-433F-ADEB-4C7F47EB2711}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8D675D0B-2AEA-4CE1-B280-FD1F8520D8D8} = {8D675D0B-2AEA-4CE1-B280-FD1F8520D8D8}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

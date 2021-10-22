@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
+    <ProjectReference Include="..\WorkerServicePublishMQ\WorkerServicePublishMQ\WorkerServicePublishMQ.csproj" />
   </ItemGroup>
 </Project>

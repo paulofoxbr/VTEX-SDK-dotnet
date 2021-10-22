@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkerServicePublishMQ.Domain
+namespace WorkerServiceConsumerMQ.Domain
 {
-    public class Order
+    public class OrderConsumer
     {
+
         public int OrderID { get; set; }
         public string Nome { get; set; }
         public string endereco { get; set; }
         public decimal valorPedido { get; set; }
-        public Order() 
-        {
-            OrderID = 0;
-        }
+
+
     }
 }

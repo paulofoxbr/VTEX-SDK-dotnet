@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkerServiceConsumerMQ.Service;
 
 namespace WorkerServiceConsumer
 {
@@ -11,6 +12,10 @@ namespace WorkerServiceConsumer
     {
         public static void Main(string[] args)
         {
+            //var ConsumerMSQ = new ConsumerMessage();
+            //ConsumerMSQ.GetQueueMessage();
+
+
             CreateHostBuilder(args).Build().Run();
         }
 

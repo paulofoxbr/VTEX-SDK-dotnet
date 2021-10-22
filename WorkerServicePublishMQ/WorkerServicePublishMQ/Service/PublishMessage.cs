@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using WorkerServicePublishMQ.Domain;
 using WorkerServicePublishMQ.Infra;
 
 namespace WorkerServicePublishMQ.Service
@@ -11,7 +13,7 @@ namespace WorkerServicePublishMQ.Service
     public class PublishMessage
     {
         public PublishMessage() { }
-        public void Publish(string Message)
+        public void Publish(Order Message)
         {
             var Config = new ConfigRMQ();
             var factory = new ConnectionFactory() {HostName=Config.HostName };
@@ -25,24 +27,37 @@ namespace WorkerServicePublishMQ.Service
                     //channel.BasicAcks += Channel_BasicAcks;
                     //channel.BasicNacks += Channel_BasicNacks;
                     //channel.BasicReturn += Channel_BasicReturn;
-
+                    channel.ExchangeDeclare(exchange: Config.Exchange,
+                        type: "fanout",
+                        durable: true,
+                        autoDelete: false,
+                        arguments: null);
                     channel.QueueDeclare(queue: Config.Queue,
                         durable: true,
                         exclusive: false,
                         autoDelete: false,
                         arguments: null);
-                    
-                    var bodyMessage = Encoding.UTF8.GetBytes(Message);
+                    channel.QueueBind(queue: Config.Queue,
+                        exchange: Config.Exchange,
+                        routingKey: string.Empty,
+                        arguments: null);
 
-                    channel.BasicPublish(exchange: "",
+                    Console.WriteLine(Message.endereco);
+
+                    var messagejson = JsonSerializer.Serialize(Message);
+                    
+                    var bodyMessage = Encoding.UTF8.GetBytes(messagejson);
+
+                    channel.BasicPublish(exchange: Config.Exchange,
                         routingKey: Config.Queue,
                         basicProperties: null,
-                        mandatory: true);
+                        mandatory: true,
+                        body:bodyMessage);
 
                     channel.WaitForConfirms(new TimeSpan(0, 0, 5));
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
                     throw ;

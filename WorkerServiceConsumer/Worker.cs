@@ -20,11 +20,11 @@ namespace WorkerServiceConsumer
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            var ConsumerMSQ = new ConsumerMessage();
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
-                var ConsumerMSQ = new ConsumerMessage();
                 
                 ConsumerMSQ.GetQueueMessage();
 

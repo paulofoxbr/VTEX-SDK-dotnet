@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WorkerServicePublishMQ.Domain;
 using WorkerServicePublishMQ.Service;
+using System.Text.Json;
 
 namespace WorkerServicePublishMQ
 {
@@ -36,7 +37,7 @@ namespace WorkerServicePublishMQ
 
         private void MyFirstPublish()
         {
-            if (_count > 100)
+            if (_count > 10)
             {
                 _dateFinish = DateTime.Now;
                 _logger.LogInformation("Worker Started running at: {time}", _dateStard);
@@ -48,7 +49,7 @@ namespace WorkerServicePublishMQ
             _count++;
             _logger.LogInformation("Worker MyFirstPublish running at: {time}", DateTimeOffset.Now);
 
-            var MyListOrder = new ListOrder().GetOrders(50);
+            var MyListOrder = new ListOrder().GetOrders(100);
             var publishMessage = new PublishMessage();
             foreach (var item in MyListOrder)
             {
@@ -56,7 +57,8 @@ namespace WorkerServicePublishMQ
                 {
                  _logger.LogInformation("Worker count : {orderid}", item.OrderID);
 
-                publishMessage.Publish("Mensagem " + item.OrderID.ToString());
+
+                publishMessage.Publish(item);
 
                 }
                 catch (Exception e)

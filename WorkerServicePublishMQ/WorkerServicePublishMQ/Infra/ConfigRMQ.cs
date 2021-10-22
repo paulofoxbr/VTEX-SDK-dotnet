@@ -15,7 +15,7 @@ namespace WorkerServicePublishMQ.Infra
         {
             HostName = "localhost";
             Queue = "Pedidos";
-            Exchange = "Ecommerce-Controplan";
+            Exchange = "Controplan";
         }
 
 

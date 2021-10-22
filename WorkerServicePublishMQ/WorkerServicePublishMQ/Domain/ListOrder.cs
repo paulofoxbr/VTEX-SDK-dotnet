@@ -20,10 +20,14 @@ namespace WorkerServicePublishMQ.Domain
 
         public List<Order> GetOrders(int CountOrder )
         {
-            for (int i = CountOrder - 1; i >= 0; i--)
+            for (int i = 1; i <= CountOrder; i++)
             {
                 var order = new Order();
                 order.OrderID = i;
+                order.endereco = "Rua numero " + i.ToString();
+                order.Nome = "Cliente " + i.ToString();
+                order.valorPedido = i;
+
                 _listOrder.Add(order);
             }
 

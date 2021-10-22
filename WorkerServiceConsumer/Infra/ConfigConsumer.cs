@@ -10,11 +10,15 @@ namespace WorkerServiceConsumerMQ.Infra
     {
         public string HostName { get; set; }
         public string Queue { get; set; }
+        public string Exchange { get; }
 
         public ConfigConsumer()
         {
+ 
             HostName = "localhost";
             Queue = "Pedidos";
+            Exchange = "Controplan";
+
         }
 
 
