@@ -18,9 +18,9 @@ namespace WorkerServicePublishMQ.Domain
 
         }
 
-        public List<Order> GetOrders(int CountOrder )
+        public List<Order> GetOrders(int CountOrder, int _count)
         {
-            for (int i = 1; i <= CountOrder; i++)
+            for (int i = _count; i <= (_count + CountOrder); i++)
             {
                 var order = new Order();
                 order.OrderID = i;

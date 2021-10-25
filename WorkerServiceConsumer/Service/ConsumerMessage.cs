@@ -11,8 +11,11 @@ using WorkerServiceConsumerMQ.Infra;
 
 namespace WorkerServiceConsumerMQ.Service
 {
-    public class ConsumerMessage
+    public class ConsumerMessage 
     {
+        private IConnection _connection { get; set; }
+        private IModel _channel { get; set; }
+
         public ConsumerMessage()
         {
 
@@ -28,16 +31,19 @@ namespace WorkerServiceConsumerMQ.Service
                 AutomaticRecoveryEnabled = true
             };
             using (var connection = factory.CreateConnection())
-
-
             using (var channel = connection.CreateModel())
             {
-                channel.BasicQos(0, 100, false);
+
+                _channel = channel;
+                _connection = connection;
+
+                channel.BasicQos(0, 10, false);
                 channel.QueueDeclare(queue: configConsumer.Queue,
                     durable: true,
                     exclusive: false,
                     autoDelete: false,
                     arguments: null);
+
 
                 channel.QueueBind(queue: configConsumer.Queue,
                     exchange: configConsumer.Exchange,
@@ -45,59 +51,69 @@ namespace WorkerServiceConsumerMQ.Service
                     arguments: null);
 
 
-
                 var consumer = new EventingBasicConsumer(channel);
-                consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body.ToArray();
-                    OrderConsumer messageJson;
-                    try
-                    {
-
-                        var message = Encoding.UTF8.GetString(body);
-                        messageJson = JsonSerializer.Deserialize<OrderConsumer>(message);
-                        Console.WriteLine($"Oder : {messageJson.Nome}");
-
-
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        if (channel.IsOpen)
-                        {
-                            channel.BasicReject(ea.DeliveryTag, true);
-                        }
-                        throw;
-                    }
-
-
-
-                    try
-                    {
-                            // doanything
-                            if (channel.IsOpen)
-                        {
-                            channel.BasicAck(ea.DeliveryTag, false);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        if (channel.IsOpen)
-                        {
-                            channel.BasicNack(ea.DeliveryTag, false, true);
-                        }
-
-                        throw;
-                    }
-                };
+                //consumer.Shutdown += Consumer_Shutdown;
+                consumer.Received += Consumer_Received;
 
                 channel.BasicConsume(queue: configConsumer.Queue,
-                    autoAck: true,
+                    autoAck: false,
                     consumer: consumer);
             }
             
 
 
+        }
+
+        private void Consumer_Received(object sender, BasicDeliverEventArgs ea)
+        {
+            var body = ea.Body.ToArray();
+            OrderConsumer messageJson;
+            try
+            {
+
+                var message = Encoding.UTF8.GetString(body);
+                messageJson = JsonSerializer.Deserialize<OrderConsumer>(message);
+                Console.WriteLine($"Oder : {messageJson.Nome}");
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                if (_channel.IsOpen)
+                {
+                    _channel.BasicReject(ea.DeliveryTag, true);
+                }
+                throw;
+            }
+
+
+
+            try
+            {
+                // doanything
+                if (_channel.IsOpen)
+                {
+                    _channel.BasicAck(ea.DeliveryTag, false);
+                }
+            }
+            catch (Exception e)
+            {
+                if (_channel.IsOpen)
+                {
+                    _channel.BasicNack(ea.DeliveryTag, false, true);
+                }
+
+                throw;
+            }
+
+
+        }
+
+        private void Consumer_Shutdown(object sender, ShutdownEventArgs e)
+        {
+            Console.WriteLine("shutdown event dispardo");
+            throw new NotImplementedException();
         }
     }
 }

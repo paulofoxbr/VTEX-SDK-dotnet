@@ -47,10 +47,14 @@ namespace WorkerServicePublishMQ.Service
                     var messagejson = JsonSerializer.Serialize(Message);
                     
                     var bodyMessage = Encoding.UTF8.GetBytes(messagejson);
+                    var properties = channel.CreateBasicProperties();
+                    
+                    properties.Persistent = true;
+                    properties.DeliveryMode = 2;
 
                     channel.BasicPublish(exchange: Config.Exchange,
                         routingKey: Config.Queue,
-                        basicProperties: null,
+                        basicProperties: properties,
                         mandatory: true,
                         body:bodyMessage);
 

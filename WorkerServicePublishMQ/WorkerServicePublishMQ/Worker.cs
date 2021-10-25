@@ -28,29 +28,32 @@ namespace WorkerServicePublishMQ
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            _logger.LogInformation("Antes do while  {time}",DateTime.Now);
             while (!stoppingToken.IsCancellationRequested)
             {
+
                 MyFirstPublish();
                 await Task.Delay(1000, stoppingToken);
             }
+            _logger.LogInformation("após o while  {time}", DateTime.Now);
         }
 
         private void MyFirstPublish()
         {
-            if (_count > 10)
-            {
-                _dateFinish = DateTime.Now;
-                _logger.LogInformation("Worker Started running at: {time}", _dateStard);
-                _logger.LogInformation("Worker Fineshed running at: {time}", _dateFinish);
+            //if (_count > 10)
+            //{
+            //    _dateFinish = DateTime.Now;
+            //    _logger.LogInformation("Worker Started running at: {time}", _dateStard);
+            //    _logger.LogInformation("Worker Fineshed running at: {time}", _dateFinish);
 
-                return;
-            }
+            //    return;
+            //}
 
-            _count++;
             _logger.LogInformation("Worker MyFirstPublish running at: {time}", DateTimeOffset.Now);
 
-            var MyListOrder = new ListOrder().GetOrders(100);
+            var MyListOrder = new ListOrder().GetOrders(100,_count);
             var publishMessage = new PublishMessage();
+            _count += 100;
             foreach (var item in MyListOrder)
             {
                 try

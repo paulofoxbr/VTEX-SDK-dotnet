@@ -12,18 +12,18 @@ namespace WorkerServiceConsumer
     {
         public static void Main(string[] args)
         {
-            //var ConsumerMSQ = new ConsumerMessage();
-            //ConsumerMSQ.GetQueueMessage();
+        //    var ConsumerMSQ = new ConsumerMessage();
+        //    ConsumerMSQ.GetQueueMessage();
 
 
-            CreateHostBuilder(args).Build().Run();
+          CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    services.AddHostedService<WorkerServiceConsumerMQ.Worker1>();
                 });
     }
 }
